@@ -28,6 +28,11 @@ public class CharacterController : MonoBehaviour
             rd2.AddForce(new Vector2(0,jumpForce));
             zipla = false;
         }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            GetComponent<AudioSource>().Play();
+        }
     }
     
     void FixedUpdate()
