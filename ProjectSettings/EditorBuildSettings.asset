@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Sinematik5.unity
     guid: b300676667e230f44b38dddaec57fa4a
   - enabled: 1
+    path: Assets/Scenes/Yol.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
     path: "Assets/Scenes/Oynan\u0131\u015F.unity"
     guid: b2f327fb8c69dbd4b8eaebbc9e10c4e7
   m_configObjects: {}
