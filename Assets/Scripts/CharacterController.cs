@@ -6,12 +6,12 @@ public class CharacterController : MonoBehaviour
 {
     public float speed;
     bool zipla = true;
-    public float jumpForce;
     Rigidbody2D rd2;
     float horizontal;
     Animator playerAnimator;
     bool turning = true;
     Vector3 scale;
+    public float jumpAmount = 3f;
     
 
     void Start()
@@ -22,11 +22,9 @@ public class CharacterController : MonoBehaviour
 
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.Space) && zipla == true))
+        if (Input.GetButtonDown("Jump") && Mathf.Approximately(rd2.velocity.y,0))
         {
-            rd2.velocity = Vector2.zero;
-            rd2.AddForce(new Vector2(0,jumpForce));
-            zipla = false;
+            rd2.AddForce(Vector3.up * jumpAmount, ForceMode2D.Impulse);
         }
 
         if (Input.GetKeyDown(KeyCode.M))
@@ -48,14 +46,6 @@ public class CharacterController : MonoBehaviour
         if(horizontal<0 && turning == true)
         {
             turncharacter();
-        }
-    }
-
-    private void OnCollissionEnter2D(Collision2D colission)
-    {
-        if (colission.transform.CompareTag ("Platform"))
-        {
-            zipla = true;
         }
     }
 
