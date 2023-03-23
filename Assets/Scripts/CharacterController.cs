@@ -11,13 +11,19 @@ public class CharacterController : MonoBehaviour
     Animator playerAnimator;
     bool turning = true;
     Vector3 scale;
-    public float jumpAmount = 3f;
-    
+    public float jumpAmount = 5f;
+   
+    public float jumpSpeed = 7f;
+    private float direction = 0f;
+    private Rigidbody2D player;
+
+
 
     void Start()
     {
         rd2 = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
+        player = GetComponent<Rigidbody2D>();//çiçek kodlarý
     }
 
     void Update()
@@ -31,6 +37,27 @@ public class CharacterController : MonoBehaviour
         {
             GetComponent<AudioSource>().Play();
         }
+
+        
+        direction = Input.GetAxis("Horizontal");
+
+        if (direction > 0f)
+        {
+            player.velocity = new Vector2(direction * speed, player.velocity.y);
+        }
+        else if (direction < 0f)
+        {
+            player.velocity = new Vector2(direction * speed, player.velocity.y);
+        }
+        else
+        {
+            player.velocity = new Vector2(0, player.velocity.y);
+        }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            player.velocity = new Vector2(player.velocity.x, jumpSpeed);
+        }//çiçek kodlarý
     }
     
     void FixedUpdate()
@@ -49,6 +76,7 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+
     void turncharacter()
     {
         turning = !turning;
@@ -57,3 +85,5 @@ public class CharacterController : MonoBehaviour
         gameObject.transform.localScale = scale;
     }
 }
+
+

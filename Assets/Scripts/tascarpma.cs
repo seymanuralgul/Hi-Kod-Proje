@@ -4,29 +4,54 @@ using UnityEngine;
 
 public class tascarpma : MonoBehaviour
 {
-    Vector2 start_position = new Vector2(0, 0);
+    Vector2 startPosition;
+    public int canBarý = 3;
+
     // Çarpýþmalarý saymak için sayaç
-    int collision_count = 0;
+    int collisionCount = 0;
+
+    // Baþlangýç konumunu ayarlayan fonksiyon
+    void Start()
+    {
+        startPosition = transform.position;
+    }
 
     // Çarpýþmalarý algýlayan fonksiyon
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Tas") //  tasa çarpýldý mý?
-        {
-            collision_count++;
 
-            // Çarpýþma sayýsý 3'e ulaþtýðýnda, oyunu durdur
-            if (collision_count == 3)
+        if (collision.gameObject.CompareTag("Tas")) // Eðer çarpýþma tas objesiyle olduysa
+        {
+            collisionCount++; // Çarpýþma sayýsýný arttýr
+            canBarý--;
+
+            if (collisionCount == 3) // Eðer bir kez çarpýldýysa
             {
-                Time.timeScale = 0; // Oyun zamanýný durdur
-                Debug.Log("Oyun bitti!");
+                ResetCharacterPosition(); // Karakteri baþlangýç pozisyonuna taþý
+               
+            }
+            if (canBarý <= 0)
+            {
+                transform.position = startPosition;
+                canBarý = 1; // CanBarý deðerini sýfýrlayýn
             }
         }
-    }
-    void ResetCharacterPosition()
-    {
-        collision_count = 0;
-        transform.position = start_position;
+
+        // Karakteri baþlangýç konumuna yerleþtiren fonksiyon
+        void ResetCharacterPosition()
+        {
+            collisionCount = 0;
+            gameObject.SetActive(false);
+            transform.position = startPosition;
+            gameObject.SetActive(true);
+            
+            // Karakterin hýzýný ve momentumunu sýfýrla
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            rb.velocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+            Renderer renderer = GetComponent<Renderer>();
+            renderer.enabled = true;
+        }
     }
 }
 
