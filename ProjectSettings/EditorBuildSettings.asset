@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/son.unity
     guid: c13cfe3643e201b48b8fbb9f152898fb
+  - enabled: 1
+    path: "Assets/Scenes/\xE7i\xE7ekkonuldu.unity"
+    guid: 2f060b9679a9a6a42b3b914461ce89cf
   m_configObjects: {}

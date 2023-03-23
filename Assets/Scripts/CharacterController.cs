@@ -12,8 +12,6 @@ public class CharacterController : MonoBehaviour
     bool turning = true;
     Vector3 scale;
     public float jumpAmount = 5f;
-   
-    public float jumpSpeed = 7f;
     private float direction = 0f;
     private Rigidbody2D player;
 
@@ -23,7 +21,6 @@ public class CharacterController : MonoBehaviour
     {
         rd2 = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
-        player = GetComponent<Rigidbody2D>();//çiçek kodlarý
     }
 
     void Update()
@@ -54,10 +51,6 @@ public class CharacterController : MonoBehaviour
             player.velocity = new Vector2(0, player.velocity.y);
         }
 
-        if (Input.GetButtonDown("Jump"))
-        {
-            player.velocity = new Vector2(player.velocity.x, jumpSpeed);
-        }//çiçek kodlarý
     }
     
     void FixedUpdate()
