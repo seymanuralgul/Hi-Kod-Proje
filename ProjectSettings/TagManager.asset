@@ -8,6 +8,8 @@ TagManager:
   - Tas
   - cicek
   - "canbar\u0131"
+  - "canBar\u0131"
+  - HealthBar
   layers:
   - Default
   - TransparentFX

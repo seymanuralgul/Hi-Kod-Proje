@@ -1,59 +1,77 @@
+using Microsoft.Unity.VisualStudio.Editor;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class tascarpma : MonoBehaviour
 {
-    Vector2 startPosition;
-    public int canBarý = 3;
+    // Karakterin baþlangýç konumu
+    Vector2 startPosition = new Vector2(6,4);
 
     // Çarpýþmalarý saymak için sayaç
     int collisionCount = 0;
 
-    // Baþlangýç konumunu ayarlayan fonksiyon
-    void Start()
-    {
-        startPosition = transform.position;
-    }
-
     // Çarpýþmalarý algýlayan fonksiyon
     void OnCollisionEnter2D(Collision2D collision)
     {
-
-        if (collision.gameObject.CompareTag("Tas")) // Eðer çarpýþma tas objesiyle olduysa
+        // Çarpýþma nesnesi "Tas" tagýna sahip mi?
+        if (collision.gameObject.CompareTag("Tas"))
         {
-            collisionCount++; // Çarpýþma sayýsýný arttýr
-            canBarý--;
+            // Çarpýþma sayýsýný artýr
+            collisionCount++;
 
-            if (collisionCount == 3) // Eðer bir kez çarpýldýysa
+            // 3 tane "Tas" taglý nesneye çarpýldýðýnda, baþlangýç pozisyonuna dön
+            if (collisionCount == 3)
             {
-                ResetCharacterPosition(); // Karakteri baþlangýç pozisyonuna taþý
-               
-            }
-            if (canBarý <= 0)
-            {
-                transform.position = startPosition;
-                canBarý = 1; // CanBarý deðerini sýfýrlayýn
+                ReturnToStartPosition();
             }
         }
+    }
 
-        // Karakteri baþlangýç konumuna yerleþtiren fonksiyon
+    // Karakteri baþlangýç pozisyonuna döndüren fonksiyon
+    void ReturnToStartPosition()
+    {
+        // Çarpýþma sayacýný sýfýrla
+        collisionCount = 0;
+
+        // Karakteri baþlangýç pozisyonuna taþý
+        transform.position = startPosition;
+
+        // Karakterin aktifliðini kontrol et
+      
         void ResetCharacterPosition()
         {
             collisionCount = 0;
             gameObject.SetActive(false);
             transform.position = startPosition;
             gameObject.SetActive(true);
-            
+
             // Karakterin hýzýný ve momentumunu sýfýrla
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
             rb.velocity = Vector2.zero;
             rb.angularVelocity = 0f;
-            Renderer renderer = GetComponent<Renderer>();
-            renderer.enabled = true;
+            SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+           renderer .enabled = true;
+
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

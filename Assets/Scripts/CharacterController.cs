@@ -14,8 +14,7 @@ public class CharacterController : MonoBehaviour
     public float jumpAmount = 5f;
     private float direction = 0f;
     private Rigidbody2D player;
-
-
+   
 
     void Start()
     {
